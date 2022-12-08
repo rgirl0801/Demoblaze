@@ -1,0 +1,1 @@
+base_url = 'https://www.demoblaze.com/index.html'
