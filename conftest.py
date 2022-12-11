@@ -1,12 +1,21 @@
 import pytest
 import Links
+
+import logging
+
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 
 
-@pytest.fixture(autouse=True)
-def browser():
-    browser = webdriver.Chrome()
+@pytest.fixture()
+def browser(request, headless):
+    options = webdriver.ChromeOptions()
+    options.headless = headless
+    logging.info('start logs')
+    browser = webdriver.Chrome(ChromeDriverManager().install(), options=options
+    )
     yield browser
+    logging.info('end logs')
     browser.quit()
 
 
@@ -16,3 +25,8 @@ def url():
     if not url:
         raise Exception("Wrong environment")
     return url
+
+
+@pytest.fixture(scope='class')
+def headless(request):
+    return request.config.getoption("--headless")
