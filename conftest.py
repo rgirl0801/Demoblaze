@@ -30,3 +30,16 @@ def url():
 @pytest.fixture(scope='class')
 def headless(request):
     return request.config.getoption("--headless")
+
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--launch",
+        default="chrome",
+        help="define browser: chrome or firefox, --browser=chrome",
+    )
+    parser.addoption(
+        "--headless",
+        action="store_true",
+        help="headless mode on or off, --headless",
+    )
