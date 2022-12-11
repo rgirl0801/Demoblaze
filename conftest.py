@@ -8,12 +8,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 @pytest.fixture()
-def browser(request, headless):
+def browser():
     options = webdriver.ChromeOptions()
-    options.headless = headless
+    options.headless = True
     logging.info('start logs')
-    browser = webdriver.Chrome(ChromeDriverManager().install(), options=options
-    )
+    browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     yield browser
     logging.info('end logs')
     browser.quit()
@@ -25,21 +24,3 @@ def url():
     if not url:
         raise Exception("Wrong environment")
     return url
-
-
-@pytest.fixture(scope='class')
-def headless(request):
-    return request.config.getoption("--headless")
-
-
-def pytest_addoption(parser):
-    parser.addoption(
-        "--launch",
-        default="chrome",
-        help="define browser: chrome or firefox, --browser=chrome",
-    )
-    parser.addoption(
-        "--headless",
-        action="store_true",
-        help="headless mode on or off, --headless",
-    )
