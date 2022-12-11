@@ -1,0 +1,37 @@
+name: Phone site
+
+on:
+  push:
+    branches: [ Kate ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+  steps:
+    - name: Install Python, pipenv and Pipfile packages
+      uses: palewire/install-python-pipenv-pipfile@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Install Chrome
+      uses: browser-actions/setup-chrome@latest
+    - name: Check Chromium version
+      run: chromium-browser --version
+
+
+    - name: run all tests
+      if: always()
+      run: pytest -v -s
+      continue-on-error: true
+
+
