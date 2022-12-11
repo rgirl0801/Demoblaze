@@ -1,3 +1,4 @@
+import time
 from typing import Tuple
 
 from selenium.webdriver.common.by import By
@@ -17,6 +18,9 @@ class MainPage(BasePage):
     B_CATEGORY_PHONES = (By.XPATH, "//a[contains(text(),'Phones')]")
     B_CATEGORY_LAPTOPS = (By.XPATH, "//a[contains(text(),'Laptops')]")
     B_CATEGORY_MONITORS = (By.XPATH, "//a[contains(text(),'Monitors')]")
+    B_SAMSUNG_S6 = (By.XPATH, "//a[contains(text(),'Samsung galaxy s6')]")
+    B_LOGIN_CONFIRM = (By.XPATH, "//a[contains(text(),'Log in')]")
+    B_LOGIN_CANCEL = (By.XPATH, "//a[contains(text(),'Close')]")
 
     def carousel_click_next(self):
         self.wait_until_clickable(self.B_CAROUSEL_NEXT).click()
@@ -41,3 +45,12 @@ class MainPage(BasePage):
 
     def select_phone_monitors(self):
         self.wait_until_clickable(self.B_CATEGORY_MONITORS)
+
+    def open_samsung_galaxy_s6(self):
+        self.wait_until_clickable(self.B_SAMSUNG_S6).click()
+
+    def login_ui(self, name, password):
+        self.wait_until_clickable(self.F_LOGIN_USERNAME).send_keys(name)
+        self.wait_until_clickable(self.F_LOGIN_PASSWORD).send_keys(password)
+        self.wait_until_clickable(self.B_LOGIN_CONFIRM).click()
+        time.sleep(3)
