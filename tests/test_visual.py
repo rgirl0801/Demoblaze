@@ -12,8 +12,10 @@ class TestVisualClass:
     def test_carousel_next_prev(self):
         self.main_page.samsung_is_present()
         self.main_page.carousel_click_prev()
-        self.main_page.nexus_is_present()
         self.main_page.laptop_is_present()
+        self.main_page.carousel_click_next()
+        self.main_page.carousel_click_next()
+        self.main_page.nexus_is_present()
 
     def test_categories_phones(self):
         self.main_page.select_phone_category()

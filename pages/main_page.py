@@ -68,4 +68,4 @@ class MainPage(BasePage):
 
     def check_qty_phones(self):
         amount = self.wait_until_all_present(self.ALL_PHONES)
-        assert len(amount) == 7
+        assert len(amount) == 7, f'Wrong qty {len(amount)}'

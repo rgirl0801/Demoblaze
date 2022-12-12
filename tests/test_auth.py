@@ -22,9 +22,9 @@ class TestAuthClass:
         self.main_page.signup_ui(POSITIVE_SIGNUP_CREDS['name'], POSITIVE_SIGNUP_CREDS['password'])
         self.main_page.check_signup_successfully_complete()
 
-    @pytest.mark.parametrize("name, password",
-        NEGATIVE_LOGIN_CREDS, ids=["empty name", "empty password",
-                                   "unregistered user"])
+    @pytest.mark.parametrize("name, password", NEGATIVE_LOGIN_CREDS,
+        ids=["empty name", "empty password",
+             "unregistered user"])
     def test_login_negative(self, name, password):
         self.main_page.go_to_login()
         self.main_page.login_ui(name, password)
