@@ -55,6 +55,9 @@ class MainPage(BasePage):
     def check_login_successfully_complete(self):
         assert self.element_is_present(self.B_LOGOUT)
 
+    def check_login_impossible(self):
+        assert self.wait_until_alert()
+
     def signup_ui(self, name, password):
         self.wait_until_clickable(self.F_SIGNUP_USERNAME).send_keys(name)
         self.wait_until_clickable(self.F_SIGNUP_PASSWORD).send_keys(password)

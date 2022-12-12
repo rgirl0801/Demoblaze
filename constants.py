@@ -2,6 +2,11 @@ from faker import Faker
 
 faker = Faker()
 POSITIVE_LOGIN_CREDS = {"name": "KateFox1", "password": "KateFox"}
+NEGATIVE_LOGIN_CREDS = [
+    ("", "KateFox"),
+    ("KateFox1", ""),
+    ("Test", "Test")
+]
 
 POSITIVE_SIGNUP_CREDS = {"name": faker.text(5), "password": "KateFox"}
 
