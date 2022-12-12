@@ -75,6 +75,9 @@ class BasePage:
     def go_to_login(self):
         self.wait_until_clickable(self.B_LOGIN).click()
 
+    def go_to_signup(self):
+        self.wait_until_clickable(self.B_SIGN_UP).click()
+
     def accept_alert(self):
         self.wait_until_alert()
         self.browser.switch_to_alert().accept()

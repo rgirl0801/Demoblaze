@@ -1,8 +1,4 @@
-import time
-from typing import Tuple
-
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 
 from pages.base_page import BasePage
 
@@ -18,9 +14,10 @@ class MainPage(BasePage):
     B_CATEGORY_PHONES = (By.XPATH, "//a[contains(text(),'Phones')]")
     B_CATEGORY_LAPTOPS = (By.XPATH, "//a[contains(text(),'Laptops')]")
     B_CATEGORY_MONITORS = (By.XPATH, "//a[contains(text(),'Monitors')]")
-    B_SAMSUNG_S6 = (By.XPATH, "//a[contains(text(),'Samsung galaxy s6')]")
-    B_LOGIN_CONFIRM = (By.XPATH, "//a[contains(text(),'Log in')]")
-    B_LOGIN_CANCEL = (By.XPATH, "//a[contains(text(),'Close')]")
+    B_SAMSUNG_S6 = (By.XPATH, "//button[contains(text(),'Samsung galaxy s6')]")
+    B_LOGIN_CONFIRM = (By.XPATH, "//button[contains(text(),'Log in')]")
+    B_LOGIN_CANCEL = (By.XPATH, "//button[contains(text(),'Close')]")
+    B_SIGNUP_CONFIRM = (By.XPATH, "//button[contains(text(),'Sign up')]")
 
     def carousel_click_next(self):
         self.wait_until_clickable(self.B_CAROUSEL_NEXT).click()
@@ -53,4 +50,14 @@ class MainPage(BasePage):
         self.wait_until_clickable(self.F_LOGIN_USERNAME).send_keys(name)
         self.wait_until_clickable(self.F_LOGIN_PASSWORD).send_keys(password)
         self.wait_until_clickable(self.B_LOGIN_CONFIRM).click()
-        time.sleep(3)
+
+    def check_login_successfully_complete(self):
+        assert self.element_is_present(self.B_LOGOUT)
+
+    def signup_ui(self, name, password):
+        self.wait_until_clickable(self.F_SIGNUP_USERNAME).send_keys(name)
+        self.wait_until_clickable(self.F_SIGNUP_PASSWORD).send_keys(password)
+        self.wait_until_clickable(self.B_SIGNUP_CONFIRM).click()
+
+    def check_signup_successfully_complete(self):
+        assert self.wait_until_alert().text == 'Sign up successful.'
