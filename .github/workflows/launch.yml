@@ -35,7 +35,7 @@ jobs:
 
     - name: Run all tests
       if: always()
-      run: pytest -v -s
+      run: pytest --alluredir=allure-results -v -s -n auto --screenshot=on
       continue-on-error: true
 
 
