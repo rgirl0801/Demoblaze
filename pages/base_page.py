@@ -7,6 +7,8 @@ from selenium.webdriver.remote.webdriver import WebElement
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
 
+from constants import TEXT_ABOUT
+
 
 class BasePage:
     LOGGER = logging.getLogger(__name__)
@@ -21,7 +23,8 @@ class BasePage:
     F_SIGNUP_PASSWORD = (By.ID, "sign-password")
     F_LOGIN_USERNAME = (By.ID, "loginusername")
     F_LOGIN_PASSWORD = (By.ID, "loginpassword")
-
+    T_ABOUT = (By.XPATH, '//*[@id="fotcont"]/div[1]/div/div/p')
+    T_GET_IN_TOUCH = (By.XPATH, "//b[contains(text(),'Get in Touch')]")
 
     def __init__(self, browser, url):
         self.browser = browser
@@ -56,12 +59,35 @@ class BasePage:
         except TimeoutException as e:
             self.LOGGER.error(f"TimeoutException: {e}")
 
+    def wait_until_present(self, locator: Tuple, timeout: int = 5) -> WebElement:
+        try:
+            return WebDriverWait(self.browser, timeout).until(
+                ec.presence_of_element_located(locator)
+            )
+        except TimeoutException as e:
+            self.LOGGER.error(f"TimeoutException: {e}")
+
+    def wait_until_all_present(self, locator: Tuple, timeout: int = 5) -> WebElement:
+        try:
+            return WebDriverWait(self.browser, timeout).until(
+                ec.presence_of_all_elements_located(locator)
+            )
+        except TimeoutException as e:
+            self.LOGGER.error(f"TimeoutException: {e}")
+
     def element_is_present(self, locator: Tuple, timeout: int = 5) -> bool:
         try:
-            self.wait_until_visible(locator, timeout)
+            self.wait_until_present(locator, timeout)
             return True
         except TimeoutException as e:
             self.LOGGER.error(f"TimeoutException: {e}")
+
+    # def elements_are_present(self, locator: Tuple, timeout: int = 5) -> bool:
+    #     try:
+    #         self.wait_until_all_present(locator, timeout)
+    #         return True
+    #     except TimeoutException as e:
+    #         self.LOGGER.error(f"TimeoutException: {e}")
 
     def go_to_home(self):
         self.wait_until_clickable(self.B_HOME).click()
@@ -81,3 +107,7 @@ class BasePage:
     def accept_alert(self):
         self.wait_until_alert()
         self.browser.switch_to_alert().accept()
+
+    def check_footer_about(self):
+        assert self.wait_until_present(self.T_ABOUT).text == TEXT_ABOUT, \
+            f'Wrong text: {self.wait_until_present(self.T_ABOUT).text}'

@@ -14,10 +14,11 @@ class MainPage(BasePage):
     B_CATEGORY_PHONES = (By.XPATH, "//a[contains(text(),'Phones')]")
     B_CATEGORY_LAPTOPS = (By.XPATH, "//a[contains(text(),'Laptops')]")
     B_CATEGORY_MONITORS = (By.XPATH, "//a[contains(text(),'Monitors')]")
-    B_SAMSUNG_S6 = (By.XPATH, "//button[contains(text(),'Samsung galaxy s6')]")
+    B_SAMSUNG_S6 = (By.XPATH, "//a[contains(text(),'Samsung galaxy s6')]")
     B_LOGIN_CONFIRM = (By.XPATH, "//button[contains(text(),'Log in')]")
     B_LOGIN_CANCEL = (By.XPATH, "//button[contains(text(),'Close')]")
     B_SIGNUP_CONFIRM = (By.XPATH, "//button[contains(text(),'Sign up')]")
+    ALL_PHONES = (By.CLASS_NAME, "hrefch")
 
     def carousel_click_next(self):
         self.wait_until_clickable(self.B_CAROUSEL_NEXT).click()
@@ -35,13 +36,13 @@ class MainPage(BasePage):
         assert self.element_is_present(self.IMG_LAPTOP)
 
     def select_phone_category(self):
-        self.wait_until_clickable(self.B_CATEGORY_PHONES)
+        self.wait_until_clickable(self.B_CATEGORY_PHONES).click()
 
-    def select_phone_laptops(self):
-        self.wait_until_clickable(self.B_CATEGORY_LAPTOPS)
+    def select_laptops(self):
+        self.wait_until_clickable(self.B_CATEGORY_LAPTOPS).click()
 
-    def select_phone_monitors(self):
-        self.wait_until_clickable(self.B_CATEGORY_MONITORS)
+    def select_monitors(self):
+        self.wait_until_clickable(self.B_CATEGORY_MONITORS).click()
 
     def open_samsung_galaxy_s6(self):
         self.wait_until_clickable(self.B_SAMSUNG_S6).click()
@@ -61,3 +62,7 @@ class MainPage(BasePage):
 
     def check_signup_successfully_complete(self):
         assert self.wait_until_alert().text == 'Sign up successful.'
+
+    def check_qty_phones(self):
+        amount = self.wait_until_all_present(self.ALL_PHONES)
+        assert len(amount) == 7
