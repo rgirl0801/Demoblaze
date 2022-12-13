@@ -2,7 +2,7 @@ name: Phone site
 
 on:
   push:
-    branches: [ Kate ]
+    branches: [ Kate, Kate-api ]
   pull_request:
     branches: [ main ]
 
