@@ -56,6 +56,7 @@ class BasePage:
             return WebDriverWait(self.browser, timeout).until(
                 ec.alert_is_present()
             )
+
         except TimeoutException as e:
             self.LOGGER.error(f"TimeoutException: {e}")
 
@@ -107,6 +108,10 @@ class BasePage:
     def accept_alert(self):
         self.wait_until_alert()
         self.browser.switch_to_alert().accept()
+
+    def get_alert_text(self):
+        prompt = self.wait_until_alert()
+        return prompt.text
 
     def check_footer_about(self):
         assert self.wait_until_present(self.T_ABOUT).text == TEXT_ABOUT, \

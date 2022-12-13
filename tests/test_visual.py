@@ -1,6 +1,4 @@
-import time
 import allure
-
 import pytest
 
 from pages.main_page import MainPage
@@ -22,11 +20,8 @@ class TestVisualClass:
         self.main_page.nexus_is_present()
 
     def test_categories_phones(self):
-        time.sleep(2)
         self.main_page.select_phone_category()
-        time.sleep(2)
         self.main_page.check_qty_phones()
-        time.sleep(2)
 
     def test_footer_is_present(self):
         self.main_page.check_footer_about()
