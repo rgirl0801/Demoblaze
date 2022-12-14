@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
+from constants import PURCHASE_DATA
 
 
 class MainPage(BasePage):
@@ -74,7 +75,7 @@ class MainPage(BasePage):
         assert len(amount) == 7, f'Wrong qty {len(amount)}'
 
     def fill_msg_form(self):
-        self.wait_until_clickable(self.CONTACT_FIELD).send_keys('name')
-        self.wait_until_clickable(self.CONTACT_NAME_FIELD).send_keys('djfbnv')
-        self.wait_until_clickable(self.MSG_FIELD).send_keys('djfbnv')
+        self.wait_until_clickable(self.CONTACT_FIELD).send_keys(PURCHASE_DATA['country'])
+        self.wait_until_clickable(self.CONTACT_NAME_FIELD).send_keys(PURCHASE_DATA['name'])
+        self.wait_until_clickable(self.MSG_FIELD).send_keys(PURCHASE_DATA['month'])
 
