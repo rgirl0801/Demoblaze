@@ -3,7 +3,7 @@ from http import HTTPStatus
 import pytest
 import requests
 
-from Links import api_url
+from links import api_url
 from api.api_helpers import get_token
 from constants import POSITIVE_API_CREDS, NEGATIVE_API_CREDS
 
@@ -21,12 +21,9 @@ def test_login_positive(token):
     assert response.status_code == HTTPStatus.OK
 
 
-@pytest.mark.parametrize('data', NEGATIVE_API_CREDS,
-    ids=[
-        "empty user", "empty password"])
-def test_login_negative(token, data):
+@pytest.mark.parametrize('data', NEGATIVE_API_CREDS, ids=["empty user", "empty password", "wrong data"])
+def test_login_negative(data):
     response = requests.post(f'{api_url}login', json=data)
-    print(response.json())
     assert response.json()['errorMessage'] == "Wrong password."
     assert response.status_code == HTTPStatus.OK
 
@@ -42,5 +39,18 @@ def test_entries():
     response = requests.get(f'{api_url}entries')
     items = response.json()['Items']
     assert response.status_code == HTTPStatus.OK
-    for item in items:
-        assert len(item) == 6
+    assert len(items) == 9
+
+
+def test_pagination():
+    response = requests.post(f'{api_url}pagination', json={"id": "9"})
+    items = response.json()['Items']
+    assert response.status_code == HTTPStatus.OK
+    assert len(items) == 6
+
+
+def test_view_all_items():
+    for id in range(1, 15):
+        response = requests.post(f'{api_url}view', json={"id": id})
+        print(response.json())
+        assert response.status_code == HTTPStatus.OK

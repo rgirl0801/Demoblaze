@@ -14,7 +14,9 @@ NEGATIVE_API_CREDS = [{
     "password": 'password'
 },
     {"username": "KateFox",
-     "password": 'password'}
+     "password": password},
+    {"username": "TEST",
+     "password": 'TEST'}
 ]
 
 faker = Faker()
@@ -36,4 +38,5 @@ PURCHASE_DATA = {
     "year": "validYear"
 }
 
-TEXT_ABOUT = "We believe performance needs to be validated at every stage of the software development cycle and our open source compatible, massively scalable platform makes that a reality."
+TEXT_ABOUT = "We believe performance needs to be validated at every stage of the software development cycle " \
+             "and our open source compatible, massively scalable platform makes that a reality."

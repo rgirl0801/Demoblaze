@@ -3,7 +3,7 @@ from json import JSONDecodeError
 from typing import Dict, Union
 from http import HTTPStatus
 import requests
-from Links import api_url
+from links import api_url
 from constants import POSITIVE_API_CREDS
 
 

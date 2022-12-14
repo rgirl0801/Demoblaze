@@ -19,6 +19,9 @@ class MainPage(BasePage):
     B_LOGIN_CANCEL = (By.XPATH, "//button[contains(text(),'Close')]")
     B_SIGNUP_CONFIRM = (By.XPATH, "//button[contains(text(),'Sign up')]")
     ALL_PHONES = (By.CLASS_NAME, "hrefch")
+    CONTACT_FIELD = (By.ID, 'recipient-email')
+    CONTACT_NAME_FIELD = (By.ID, 'recipient-name')
+    MSG_FIELD = (By.ID, 'message-text')
 
     def carousel_click_next(self):
         self.wait_until_clickable(self.B_CAROUSEL_NEXT).click()
@@ -69,3 +72,9 @@ class MainPage(BasePage):
     def check_qty_phones(self):
         amount = self.wait_until_all_present(self.ALL_PHONES)
         assert len(amount) == 7, f'Wrong qty {len(amount)}'
+
+    def fill_msg_form(self):
+        self.wait_until_clickable(self.CONTACT_FIELD).send_keys('name')
+        self.wait_until_clickable(self.CONTACT_NAME_FIELD).send_keys('djfbnv')
+        self.wait_until_clickable(self.MSG_FIELD).send_keys('djfbnv')
+
