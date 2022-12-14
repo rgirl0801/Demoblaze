@@ -8,12 +8,13 @@ import links
 
 
 @pytest.fixture()
-def browser(request, headless):
+def browser(headless):
     options = webdriver.ChromeOptions()
     options.headless = headless
     logging.info('start logs')
     browser = webdriver.Chrome(ChromeDriverManager().install(), options=options
     )
+    browser.set_window_size(1920, 1080)
     yield browser
     logging.info('end logs')
     browser.quit()
