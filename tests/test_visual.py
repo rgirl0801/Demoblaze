@@ -24,6 +24,11 @@ class TestVisualClass:
         self.main_page.select_phone_category()
         self.main_page.check_qty_phones()
 
+    @allure.title("Laptop's category is available")
+    def test_categories_laptops(self):
+        self.main_page.select_laptops()
+        self.main_page.check_qty_laptops()
+
     @allure.title("Footer is present and text is valid")
     def test_footer_is_present(self):
         self.main_page.check_footer_about()
