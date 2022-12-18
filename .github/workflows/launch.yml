@@ -1,0 +1,64 @@
+name: Phone site
+
+on:
+  push:
+    branches: [ Kate ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+
+    steps:
+    - uses: actions/checkout@v3
+      id: setup-python
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Install Chrome
+      uses: browser-actions/setup-chrome@latest
+    - name: Check Chromium version
+      run: chromium-browser --version
+
+
+    - name: Run all tests
+      if: always()
+      run: pytest --alluredir=allure-results -v -s -n auto --screenshot=on
+      continue-on-error: true
+
+    - name: Get Allure history
+      uses: actions/checkout@v3
+      if: always()
+      continue-on-error: true
+      with:
+        ref: gh-pages
+        path: gh-pages
+
+    - name: Allure Report
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      with:
+        allure_results: allure-results
+        allure_history: allure-history
+
+    - name: Deploy report to Github Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v2
+      env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
+
+

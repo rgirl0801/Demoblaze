@@ -1,12 +1,21 @@
 import pytest
 import Links
+
+import logging
+
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture()
 def browser():
-    browser = webdriver.Chrome()
+    options = webdriver.ChromeOptions()
+    options.headless = True
+    logging.info('start logs')
+    browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    browser.set_window_size(1920, 1080)
     yield browser
+    logging.info('end logs')
     browser.quit()
 
 
