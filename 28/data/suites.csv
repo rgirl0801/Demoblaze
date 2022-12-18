@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sun Dec 18 23:41:17 GMT 2022","Sun Dec 18 23:41:18 GMT 2022","1361","tests","test_auth","TestAuthClass","","","test_login_negative[unregistered user]",""
+"passed","Sun Dec 18 23:41:14 GMT 2022","Sun Dec 18 23:41:15 GMT 2022","1055","tests","test_auth","TestAuthClass","","","test_login_negative[empty password]",""
+"passed","Sun Dec 18 23:41:11 GMT 2022","Sun Dec 18 23:41:12 GMT 2022","1026","tests","test_auth","TestAuthClass","","","test_login_negative[empty name]",""
+"passed","Sun Dec 18 23:41:11 GMT 2022","Sun Dec 18 23:41:12 GMT 2022","1060","tests","test_auth","TestAuthClass","","","test_login_ui",""
