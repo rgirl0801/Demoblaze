@@ -25,3 +25,5 @@ def url():
     if not url:
         raise Exception("Wrong environment")
     return url
+
+
