@@ -37,6 +37,19 @@ class BasePage:
         except Exception as e:
             self.LOGGER.error(f"tException: {e}")
 
+    def page_is_open(self, url):
+        try:
+            self.wait_for_url_to_be(url)
+            return True
+        except TimeoutException:
+            return False
+
+    def wait_for_url_to_be(self, url: str, timeout: int = 5) -> bool:
+        try:
+            return WebDriverWait(self.browser, timeout).until(ec.url_to_be(url))
+        except TimeoutException as e:
+            self.LOGGER.error(f"TimeoutException: {e}")
+
     def wait_until_clickable(self, locator: Tuple, timeout: int = 5) -> WebElement:
         try:
             return WebDriverWait(self.browser, timeout).until(

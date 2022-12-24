@@ -16,7 +16,7 @@ class CartPage(BasePage):
     F_MONTH = (By.ID, "month")
     F_YEAR = (By.ID, "year")
     B_PURCHASE_CONFIRM = (By.XPATH, "//button[contains(text(),'Purchase')]")
-    SUCCESS_POPUP = (By.XPATH, "/html[1]/body[1]/div[10]/h2[1]")
+    SUCCESS_POPUP = (By.XPATH, "//h2[contains(text(),'Thank you for your purchase!')]")
     B_OK = (By.XPATH, "//button[contains(text(),'OK')]")
 
     def place_order(self):
@@ -30,10 +30,10 @@ class CartPage(BasePage):
         self.wait_until_clickable(self.F_MONTH).send_keys(month)
         self.wait_until_clickable(self.F_YEAR).send_keys(year)
 
-    def confirm_purchase(self):
+    def press_confirm_purchase(self):
         self.wait_until_clickable(self.B_PURCHASE_CONFIRM).click()
 
-    def ok_purchase(self):
+    def click_ok_purchase(self):
         self.wait_until_clickable(self.B_OK).click()
 
     def text_in_popup(self):
