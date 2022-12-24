@@ -9,6 +9,7 @@ from pages.main_page import MainPage
 from pages.product_page import ProductPage
 
 
+@allure.story('Purchase')
 class TestPurchaseClass:
     @pytest.fixture(autouse=True)
     def setup(self, browser, url):
@@ -17,7 +18,7 @@ class TestPurchaseClass:
         self.cart_page = CartPage(browser, url)
 
     @pytest.mark.e2e
-    @allure.testcase('Successful purchase')
+    @allure.feature('Successful purchase')
     def test_purchase_success(self, url):
         self.main_page.open_page()
         self.main_page.open_samsung_galaxy_s6()
@@ -31,7 +32,7 @@ class TestPurchaseClass:
         assert self.main_page.page_is_open(url)
 
     @pytest.mark.e2e
-    @allure.testcase('Purchase without name impossible')
+    @allure.feature('Purchase without name impossible')
     def test_purchase_wo_name(self):
         self.main_page.open_page()
         self.main_page.open_samsung_galaxy_s6()
