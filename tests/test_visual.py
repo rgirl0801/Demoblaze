@@ -25,3 +25,6 @@ class TestVisualClass:
 
     def test_footer_is_present(self):
         self.main_page.check_footer_about()
+
+    def test_logo_is_present(self):
+        self.main_page.check_logo_is_exist()

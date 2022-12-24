@@ -25,6 +25,7 @@ class BasePage:
     F_LOGIN_PASSWORD = (By.ID, "loginpassword")
     T_ABOUT = (By.XPATH, '//*[@id="fotcont"]/div[1]/div/div/p')
     T_GET_IN_TOUCH = (By.XPATH, "//b[contains(text(),'Get in Touch')]")
+    LOGO = (By.ID, 'nava')
 
     def __init__(self, browser, url):
         self.browser = browser
@@ -116,3 +117,6 @@ class BasePage:
     def check_footer_about(self):
         assert self.wait_until_present(self.T_ABOUT).text == TEXT_ABOUT, \
             f'Wrong text: {self.wait_until_present(self.T_ABOUT).text}'
+
+    def check_logo_is_exist(self):
+        assert self.wait_until_present(self.LOGO)
