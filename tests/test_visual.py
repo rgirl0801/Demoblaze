@@ -24,6 +24,7 @@ class TestVisualClass:
         self.main_page.carousel_click_next()
         self.main_page.nexus_is_present()
 
+    @pytest.mark.xfail
     @allure.testcase("Category displays valid items")
     def test_categories_phones(self):
         self.main_page.select_phone_category()

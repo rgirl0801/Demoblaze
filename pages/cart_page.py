@@ -1,7 +1,5 @@
-from typing import Tuple
-
+import allure
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 
 from pages.base_page import BasePage
 

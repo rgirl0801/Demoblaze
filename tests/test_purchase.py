@@ -1,5 +1,6 @@
 import time
 
+import allure
 import pytest
 
 from constants import PURCHASE_DATA
@@ -15,7 +16,8 @@ class TestPurchaseClass:
         self.product_page = ProductPage(browser, url)
         self.cart_page = CartPage(browser, url)
 
-    # @pytest.mark.xfail
+    @pytest.mark.e2e
+    @allure.testcase('Successful purchase')
     def test_purchase_success(self, url):
         self.main_page.open_page()
         self.main_page.open_samsung_galaxy_s6()
@@ -28,6 +30,8 @@ class TestPurchaseClass:
         self.cart_page.click_ok_purchase()
         assert self.main_page.page_is_open(url)
 
+    @pytest.mark.e2e
+    @allure.testcase('Purchase without name impossible')
     def test_purchase_wo_name(self):
         self.main_page.open_page()
         self.main_page.open_samsung_galaxy_s6()
@@ -39,6 +43,8 @@ class TestPurchaseClass:
         self.cart_page.press_confirm_purchase()
         assert self.cart_page.get_alert_text() == 'Please fill out Name and Creditcard.'
 
+    @pytest.mark.e2e
+    @allure.feature('Purchase without card number impossible')
     def test_purchase_wo_card(self):
         self.main_page.open_page()
         self.main_page.open_samsung_galaxy_s6()
