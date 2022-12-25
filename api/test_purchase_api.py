@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 import pytest
 import requests
-from api.api_helpers import get_token
+from api.api_methods import get_token
 
 from links import api_url
 

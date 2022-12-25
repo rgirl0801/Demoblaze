@@ -1,6 +1,6 @@
 import pytest
 
-from api.api_helpers import *
+from api.api_methods import *
 
 
 @pytest.fixture()
