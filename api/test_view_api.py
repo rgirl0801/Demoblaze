@@ -1,26 +1,14 @@
-from http import HTTPStatus
-
-import requests
-
-from links import api_url
+from api.api_methods import *
 
 
-def test_entries():
-    response = requests.get(f'{api_url}entries')
-    items = response.json()['Items']
-    assert response.status_code == HTTPStatus.OK
-    assert len(items) == 9
-
-
-def test_pagination():
-    response = requests.post(f'{api_url}pagination', json={"id": "9"})
-    items = response.json()['Items']
-    assert response.status_code == HTTPStatus.OK
-    assert len(items) == 6
+def test_qty_all_products():
+    assert len(get_all_products()) == 15
 
 
 def test_view_all_items():
-    for id in range(1, 15):
-        response = requests.post(f'{api_url}view', json={"id": id})
-        print(response.json())
-        assert response.status_code == HTTPStatus.OK
+    for prod_id in range(1, 15):
+        print(view_product(prod_id))
+
+
+def test_get_price():
+    print(view_product(1)['price'])
